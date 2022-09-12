@@ -3,22 +3,41 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "postinstall": "patch-package",
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
+    "detox:build:ios": "detox build -c ios",
+    "detox:test:ios": "detox test -c ios",
+    "detox:build:android": "detox build -c android",
+    "detox:test:android": "detox test -c android",
     "web": "expo start --web"
   },
   "dependencies": {
     "expo": "~46.0.9",
+    "expo-dev-client": "^1.2.1",
+    "expo-dev-launcher": "^1.2.1",
+    "expo-dev-menu": "^1.2.1",
+    "expo-linking": "~3.2.2",
+    "expo-modules-core": "~0.11.5",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
+    "expo-updates": "~0.14.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.5",
     "react-native-web": "~0.18.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "detox": "^19.12.1",
+    "eslint": "^8.23.1",
+    "eslint-plugin-detox": "^1.0.0",
+    "jest": "^29.0.3",
+    "jest-expo": "^46.0.1",
+    "jest-expo-puppeteer": "^1.4.2",
+    "patch-package": "^6.4.7",
+    "prettier": "^2.7.1"
   },
   "private": true
 }

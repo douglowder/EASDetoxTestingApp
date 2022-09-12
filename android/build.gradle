@@ -8,9 +8,7 @@ buildscript {
         minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '21')
         compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '31')
         targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '31')
-        if (findProperty('android.kotlinVersion')) {
-            kotlinVersion = findProperty('android.kotlinVersion')
-        }
+        kotlinVersion = findProperty('android.kotlinVersion') ?: '1.6.10'
         frescoVersion = findProperty('expo.frescoVersion') ?: '2.5.0'
 
         if (System.properties['os.arch'] == 'aarch64') {
@@ -29,6 +27,8 @@ buildscript {
         classpath('com.android.tools.build:gradle:7.1.1')
         classpath('com.facebook.react:react-native-gradle-plugin')
         classpath('de.undercouch:gradle-download-task:5.0.1')
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -44,6 +44,10 @@ allprojects {
         maven {
             // Android JSC is installed from npm
             url(new File(['node', '--print', "require.resolve('jsc-android/package.json')"].execute(null, rootDir).text.trim(), '../dist'))
+        }
+        maven {
+            // All of Detox' artifacts are provided via the npm module
+            url "$rootDir/../node_modules/detox/Detox-android"
         }
 
         google()
